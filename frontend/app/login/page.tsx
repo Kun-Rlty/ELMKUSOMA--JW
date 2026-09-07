@@ -57,9 +57,9 @@ export default function LoginPage() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/images/login-bg.jpg')" }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-foreground/60" />
         <div className="relative z-10 w-full max-w-md">
-          <div className="rounded-2xl border border-white/10 bg-card/95 backdrop-blur-sm p-8 shadow-lg">
+          <div className="rounded-2xl border border-border bg-card/95 backdrop-blur-sm p-8 shadow-lg">
             <div className="text-center">
               <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 Welcome back
@@ -70,7 +70,7 @@ export default function LoginPage() {
             </div>
 
             {serverError && (
-              <div className="mt-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-400">
+              <div className="mt-6 rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
                 {serverError}
               </div>
             )}
@@ -89,7 +89,7 @@ export default function LoginPage() {
                     className="mt-1.5 h-11 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
                   />
                   {errors.email && (
-                    <p className="mt-1.5 text-xs text-red-600">{errors.email.message}</p>
+                    <p className="mt-1.5 text-xs text-destructive">{errors.email.message}</p>
                   )}
                 </div>
 
@@ -123,7 +123,7 @@ export default function LoginPage() {
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="mt-1.5 text-xs text-red-600">{errors.password.message}</p>
+                    <p className="mt-1.5 text-xs text-destructive">{errors.password.message}</p>
                   )}
                 </div>
               </div>

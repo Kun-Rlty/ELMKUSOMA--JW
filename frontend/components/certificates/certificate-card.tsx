@@ -1,12 +1,13 @@
 import type { Certificate } from "@/lib/data"
+import { Award, BadgeCheck } from "lucide-react"
 
 export function CertificateCard({ certificate }: { certificate: Certificate }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
       <div className="border-b border-border bg-accent/50 px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="flex size-11 items-center justify-center rounded-xl text-orange bg-orange/10">
-            ★
+          <div className="flex size-11 items-center justify-center rounded-xl bg-orange/10">
+            <Award className="size-5 text-orange" />
           </div>
           <div>
             <p className="text-xs font-medium text-muted-foreground">Certificate of Completion</p>
@@ -57,7 +58,8 @@ export function CertificateCard({ certificate }: { certificate: Certificate }) {
         )}
 
         <div className="mt-6 flex items-center justify-center gap-2 rounded-xl border border-teal/20 bg-teal/5 px-4 py-3">
-          <span className="text-sm font-semibold text-teal">✓ Verified Certificate</span>
+          <BadgeCheck className="size-5 text-teal" />
+          <span className="text-sm font-semibold text-teal">Verified Certificate</span>
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground">

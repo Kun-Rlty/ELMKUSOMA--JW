@@ -9,7 +9,7 @@ function StatusBadge({ status, badge }: { status: LiveClass["status"]; badge: st
   if (status === "live") {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-md bg-teal px-2.5 py-1 text-xs font-semibold text-teal-foreground shadow-sm">
-        <span className="size-1.5 animate-pulse rounded-full bg-white" />
+        <span className="size-1.5 animate-pulse rounded-full bg-teal-foreground" />
         {badge}
       </span>
     )
@@ -38,7 +38,7 @@ export function LiveClassCard({ item }: { item: LiveClass }) {
           <StatusBadge status={item.status} badge={item.badge} />
         </div>
         {isLive && (
-          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-md bg-black/60 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur">
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-md bg-foreground/60 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-background backdrop-blur">
             <span className="size-1.5 rounded-full bg-red-500" />
             Live
           </span>

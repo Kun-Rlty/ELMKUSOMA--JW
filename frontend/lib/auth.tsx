@@ -7,14 +7,14 @@ export interface AuthUser {
   id: string
   name: string
   email: string
-  role: "student" | "teacher" | "admin"
+  role: string
 }
 
 interface AuthContextValue {
   user: AuthUser | null
   loading: boolean
   login: (email: string, password: string) => Promise<{ error?: string }>
-  register: (data: { name: string; email: string; password: string; educationLevel: string }) => Promise<{ error?: string }>
+  register: (data: { name: string; email: string; password: string; role?: string; educationLevel?: string }) => Promise<{ error?: string }>
   logout: () => void
 }
 
@@ -76,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return {}
   }, [])
 
-  const register = useCallback(async (data: { name: string; email: string; password: string; educationLevel: string }) => {
+  const register = useCallback(async (data: { name: string; email: string; password: string; role?: string; educationLevel?: string }) => {
     const users = getStoredUsers()
     if (users.some((u) => u.email === data.email)) {
       return { error: "An account with this email already exists" }
@@ -85,7 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       id: crypto.randomUUID(),
       name: data.name,
       email: data.email,
-      role: "student",
+      role: data.role || "Student",
       password: data.password,
     }
     users.push(newUser)

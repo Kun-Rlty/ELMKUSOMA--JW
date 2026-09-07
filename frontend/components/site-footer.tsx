@@ -113,13 +113,13 @@ export function SiteFooter() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} ELMKUSOMA. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/about" className="text-sm text-muted-foreground hover:text-primary">
+            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">
               Privacy
             </Link>
-            <Link href="/about" className="text-sm text-muted-foreground hover:text-primary">
+            <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary">
               Terms
             </Link>
-            <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">
+            <Link href="/support" className="text-sm text-muted-foreground hover:text-primary">
               Support
             </Link>
           </div>

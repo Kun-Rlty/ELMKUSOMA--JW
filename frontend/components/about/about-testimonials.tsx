@@ -25,6 +25,8 @@ const testimonials = [
   },
 ]
 
+import { Star } from "lucide-react"
+
 export function AboutTestimonials() {
   return (
     <section className="bg-muted/50 py-16 lg:py-20">
@@ -47,7 +49,7 @@ export function AboutTestimonials() {
               <p className="text-sm leading-relaxed text-muted-foreground">{t.quote}</p>
               <div className="mt-4 flex items-center gap-0.5">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <span key={i} className="text-sm text-orange">&#9733;</span>
+                  <Star key={i} className="size-4 text-orange fill-orange" />
                 ))}
               </div>
               <div className="mt-4 flex items-center gap-3 border-t border-border pt-4">

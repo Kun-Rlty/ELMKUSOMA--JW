@@ -38,7 +38,7 @@ export function DashboardSidebar({ onNavigate }: { onNavigate?: () => void }) {
 
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
         {nav.map((item) => {
-          const active = pathname === item.href
+          const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))
           return (
             <Link
               key={item.href}

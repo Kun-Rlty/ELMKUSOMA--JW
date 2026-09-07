@@ -18,7 +18,7 @@ export function LiveClassesBrowser() {
 
   const filtered = liveClasses.filter((c) => {
     if (active === "live") return c.status === "live"
-    if (active === "past") return false
+    if (active === "past") return c.status === "past"
     return c.status !== "live"
   })
 

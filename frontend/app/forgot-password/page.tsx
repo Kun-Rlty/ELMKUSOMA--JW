@@ -112,7 +112,7 @@ export default function ForgotPasswordPage() {
                   className="mt-1.5 h-11 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
                 />
                 {errors.email && (
-                  <p className="mt-1.5 text-xs text-red-600">{errors.email.message}</p>
+                  <p className="mt-1.5 text-xs text-destructive">{errors.email.message}</p>
                 )}
               </div>
 
