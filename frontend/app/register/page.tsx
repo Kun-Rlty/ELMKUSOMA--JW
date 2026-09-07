@@ -9,24 +9,22 @@ import { z } from "zod"
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/lib/auth"
-import { Eye, EyeOff, CheckCircle } from "lucide-react"
 
-const roles = [
-  "Student",
-  "Teacher",
-  "Lecturer",
-  "Facilitator",
-  "Parent",
-  "Other",
+const educationLevels = [
+  "Nursery School",
+  "Primary School",
+  "Lower Secondary School",
+  "Advanced Secondary School",
+  "College",
+  "Vocational",
+  "University",
 ]
 
 const registerSchema = z
   .object({
-    firstName: z.string().min(1, "First name is required").min(2, "First name must be at least 2 characters"),
-    middleName: z.string().optional(),
-    lastName: z.string().min(1, "Last name / surname is required").min(2, "Last name must be at least 2 characters"),
+    name: z.string().min(1, "Full name is required").min(2, "Name must be at least 2 characters"),
     email: z.string().min(1, "Email is required").email("Please enter a valid email address"),
-    role: z.string().min(1, "Please select your role"),
+    educationLevel: z.string().min(1, "Please select your education level"),
     password: z
       .string()
       .min(1, "Password is required")
@@ -60,12 +58,11 @@ export default function RegisterPage() {
 
   async function onSubmit(values: RegisterValues) {
     setServerError("")
-    const fullName = [values.firstName, values.middleName, values.lastName].filter(Boolean).join(" ")
     const result = await registerUser({
-      name: fullName,
+      name: values.name,
       email: values.email,
       password: values.password,
-      role: values.role,
+      educationLevel: values.educationLevel,
     })
     if (result.error) {
       setServerError(result.error)
@@ -76,22 +73,17 @@ export default function RegisterPage() {
 
   if (registered) {
     return (
-      <div className="flex min-h-dvh flex-col">
-        <header className="relative z-10 border-b border-border bg-background/90 backdrop-blur">
+      <div className="flex min-h-dvh flex-col bg-muted/40">
+        <header className="border-b border-border bg-background/90 backdrop-blur">
           <div className="mx-auto flex h-16 max-w-7xl items-center px-4 sm:px-6 lg:px-8">
             <Logo />
           </div>
         </header>
-        <main className="relative flex-1 flex items-center justify-center px-4 py-12">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/images/register-bg.jpg')" }}
-          />
-          <div className="absolute inset-0 bg-foreground/60" />
-          <div className="relative z-10 w-full max-w-md">
-            <div className="rounded-2xl border border-border bg-card/95 backdrop-blur-sm p-8 shadow-lg text-center">
+        <main className="flex flex-1 items-center justify-center px-4 py-12">
+          <div className="w-full max-w-md">
+            <div className="rounded-2xl border border-border bg-card p-8 shadow-xs text-center">
               <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-teal/10">
-                <CheckCircle className="size-7 text-teal" />
+                <span className="text-2xl text-teal font-bold">OK</span>
               </div>
               <h1 className="mt-4 text-2xl font-bold tracking-tight text-foreground">
                 Account Created!
@@ -110,20 +102,16 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-dvh flex-col">
-      <header className="relative z-10 border-b border-border bg-background/90 backdrop-blur">
+    <div className="flex min-h-dvh flex-col bg-muted/40">
+      <header className="border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center px-4 sm:px-6 lg:px-8">
           <Logo />
         </div>
       </header>
-      <main className="relative flex-1 flex items-center justify-center px-4 py-12">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/images/register-bg.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-foreground/60" />
-        <div className="relative z-10 w-full max-w-md">
-          <div className="rounded-2xl border border-border bg-card/95 backdrop-blur-sm p-8 shadow-lg">
+
+      <main className="flex flex-1 items-center justify-center px-4 py-12">
+        <div className="w-full max-w-md">
+          <div className="rounded-2xl border border-border bg-card p-8 shadow-xs">
             <div className="text-center">
               <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 Create your account
@@ -134,57 +122,26 @@ export default function RegisterPage() {
             </div>
 
             {serverError && (
-              <div className="mt-6 rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+              <div className="mt-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-400">
                 {serverError}
               </div>
             )}
 
             <form className="mt-8 space-y-5" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-foreground">
-                      First Name
-                    </label>
-                    <input
-                      id="firstName"
-                      type="text"
-                      placeholder="First name"
-                      {...register("firstName")}
-                      className="mt-1.5 h-11 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
-                    />
-                    {errors.firstName && (
-                      <p className="mt-1.5 text-xs text-destructive">{errors.firstName.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="middleName" className="block text-sm font-medium text-foreground">
-                      Middle Name <span className="text-muted-foreground">(optional)</span>
-                    </label>
-                    <input
-                      id="middleName"
-                      type="text"
-                      placeholder="Middle name"
-                      {...register("middleName")}
-                      className="mt-1.5 h-11 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
-                    />
-                  </div>
-                </div>
-
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-foreground">
-                    Last Name / Surname
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground">
+                    Full Name
                   </label>
                   <input
-                    id="lastName"
+                    id="name"
                     type="text"
-                    placeholder="Last name or surname"
-                    {...register("lastName")}
+                    placeholder="Enter your full name"
+                    {...register("name")}
                     className="mt-1.5 h-11 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
                   />
-                  {errors.lastName && (
-                    <p className="mt-1.5 text-xs text-destructive">{errors.lastName.message}</p>
+                  {errors.name && (
+                    <p className="mt-1.5 text-xs text-red-600">{errors.name.message}</p>
                   )}
                 </div>
 
@@ -200,28 +157,28 @@ export default function RegisterPage() {
                     className="mt-1.5 h-11 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
                   />
                   {errors.email && (
-                    <p className="mt-1.5 text-xs text-destructive">{errors.email.message}</p>
+                    <p className="mt-1.5 text-xs text-red-600">{errors.email.message}</p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="role" className="block text-sm font-medium text-foreground">
-                    Register as
+                  <label htmlFor="educationLevel" className="block text-sm font-medium text-foreground">
+                    Education Level
                   </label>
                   <select
-                    id="role"
-                    {...register("role")}
+                    id="educationLevel"
+                    {...register("educationLevel")}
                     className="mt-1.5 h-11 w-full appearance-none rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-foreground outline-none transition-colors focus:border-ring focus:bg-background"
                   >
-                    <option value="">Select your role</option>
-                    {roles.map((role) => (
-                      <option key={role} value={role}>
-                        {role}
+                    <option value="">Select your education level</option>
+                    {educationLevels.map((level) => (
+                      <option key={level} value={level}>
+                        {level}
                       </option>
                     ))}
                   </select>
-                  {errors.role && (
-                    <p className="mt-1.5 text-xs text-destructive">{errors.role.message}</p>
+                  {errors.educationLevel && (
+                    <p className="mt-1.5 text-xs text-red-600">{errors.educationLevel.message}</p>
                   )}
                 </div>
 
@@ -243,11 +200,11 @@ export default function RegisterPage() {
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground hover:text-foreground"
                       tabIndex={-1}
                     >
-                      {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                      {showPassword ? "Hide" : "Show"}
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="mt-1.5 text-xs text-destructive">{errors.password.message}</p>
+                    <p className="mt-1.5 text-xs text-red-600">{errors.password.message}</p>
                   )}
                 </div>
 
@@ -269,11 +226,11 @@ export default function RegisterPage() {
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground hover:text-foreground"
                       tabIndex={-1}
                     >
-                      {showConfirm ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                      {showConfirm ? "Hide" : "Show"}
                     </button>
                   </div>
                   {errors.confirmPassword && (
-                    <p className="mt-1.5 text-xs text-destructive">{errors.confirmPassword.message}</p>
+                    <p className="mt-1.5 text-xs text-red-600">{errors.confirmPassword.message}</p>
                   )}
                 </div>
               </div>
@@ -293,11 +250,11 @@ export default function RegisterPage() {
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
             By creating an account, you agree to our{" "}
-            <Link href="/terms" className="underline hover:text-foreground">
+            <Link href="/about" className="underline hover:text-foreground">
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="/privacy" className="underline hover:text-foreground">
+            <Link href="/about" className="underline hover:text-foreground">
               Privacy Policy
             </Link>
             .

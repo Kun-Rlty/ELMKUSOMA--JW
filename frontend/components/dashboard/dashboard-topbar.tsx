@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Menu, X, Bell, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar"
 import { useAuth } from "@/lib/auth"
@@ -32,15 +31,14 @@ export function DashboardTopbar() {
           aria-label="Open menu"
           onClick={() => setOpen(true)}
         >
-          <Menu className="size-5" />
+          Menu
         </Button>
 
-          <label className="relative hidden items-center sm:flex">
-          <Search className="absolute left-3 size-4 text-muted-foreground" />
+        <label className="relative hidden items-center sm:flex">
           <input
             type="search"
             placeholder="Search courses, lessons..."
-            className="h-10 w-64 rounded-lg border border-border bg-muted/60 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:bg-background"
+            className="h-10 w-64 rounded-lg border border-border bg-muted/60 pl-3 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:bg-background"
           />
         </label>
 
@@ -50,7 +48,7 @@ export function DashboardTopbar() {
             className="relative flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label="Notifications"
           >
-            <Bell className="size-5" />
+            <span className="size-5" />
             <span className="absolute right-2 top-2 size-2 rounded-full bg-orange" />
           </button>
           <div className="relative">
@@ -96,7 +94,7 @@ export function DashboardTopbar() {
               aria-label="Close menu"
               onClick={() => setOpen(false)}
             >
-              <X className="size-5" />
+              Close
             </Button>
             <DashboardSidebar onNavigate={() => setOpen(false)} />
           </div>

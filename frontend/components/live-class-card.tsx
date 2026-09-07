@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Eye, Clock, Users, Play } from "lucide-react"
 import type { LiveClass } from "@/lib/data"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -54,14 +53,14 @@ export function LiveClassCard({ item }: { item: LiveClass }) {
         <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
           {isLive ? (
             <>
-              <span><Eye className="inline size-3.5" /> {item.watching} watching</span>
+              <span>{item.watching} watching</span>
             </>
           ) : (
             <>
-              <span><Clock className="inline size-3.5" /> {item.time}</span>
+              <span>{item.time}</span>
               {item.going ? (
                 <span className="ml-auto inline-flex items-center gap-1">
-                  <Users className="size-3.5" /> {item.going} going
+                  {item.going} going
                 </span>
               ) : null}
             </>
@@ -74,7 +73,6 @@ export function LiveClassCard({ item }: { item: LiveClass }) {
               href={`/live-classes/${item.id}`}
               className={cn(buttonVariants(), "h-9 w-full bg-teal text-teal-foreground hover:bg-teal/90")}
             >
-              <Play className="mr-1.5 size-3.5 fill-current" />
               Join Live Class
             </Link>
           ) : (

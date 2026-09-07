@@ -8,7 +8,6 @@ import { z } from "zod"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Button } from "@/components/ui/button"
-import { Mail, Clock, MapPin, CheckCircle } from "lucide-react"
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").min(2, "Name must be at least 2 characters"),
@@ -70,10 +69,7 @@ export default function ContactPage() {
 
                 <div className="mt-8 space-y-6">
                   <div className="rounded-2xl border border-border bg-card p-5">
-                    <div className="flex items-center gap-2">
-                      <Mail className="size-4 text-muted-foreground" />
-                      <h3 className="text-sm font-semibold text-foreground">Email</h3>
-                    </div>
+                    <h3 className="text-sm font-semibold text-foreground">Email</h3>
                     <a
                       href="mailto:info@elmkusoma.co.tz"
                       className="mt-1.5 block text-sm text-primary hover:underline"
@@ -86,20 +82,14 @@ export default function ContactPage() {
                   </div>
 
                   <div className="rounded-2xl border border-border bg-card p-5">
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4 text-muted-foreground" />
-                      <h3 className="text-sm font-semibold text-foreground">Response Time</h3>
-                    </div>
+                    <h3 className="text-sm font-semibold text-foreground">Response Time</h3>
                     <p className="mt-1.5 text-sm text-muted-foreground">
                       We aim to respond within 24 hours on business days.
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-border bg-card p-5">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4 text-muted-foreground" />
-                      <h3 className="text-sm font-semibold text-foreground">Location</h3>
-                    </div>
+                    <h3 className="text-sm font-semibold text-foreground">Location</h3>
                     <p className="mt-1.5 text-sm text-muted-foreground">
                       Dar es Salaam, Tanzania
                     </p>
@@ -112,7 +102,7 @@ export default function ContactPage() {
                 {submitted ? (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <div className="flex size-14 items-center justify-center rounded-full bg-teal/10">
-                      <CheckCircle className="size-7 text-teal" />
+                      <span className="text-2xl text-teal font-bold">OK</span>
                     </div>
                     <h2 className="mt-4 text-xl font-bold text-foreground">Message Sent!</h2>
                     <p className="mt-2 max-w-sm text-sm text-muted-foreground">

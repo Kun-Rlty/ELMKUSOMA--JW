@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -29,7 +28,6 @@ export default function NotFound() {
               "mt-8 inline-flex h-11 gap-2 px-6"
             )}
           >
-            <ArrowLeft className="mr-2 size-4" />
             Back to Home
           </Link>
         </div>
